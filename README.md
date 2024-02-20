@@ -96,9 +96,9 @@ Idea here is to ypdate .env file to provide local config volume path to bahmni-d
 	1. Update the `CONFIG_VOLUME` varaible in `bahmni-docker/bahmni-lite/.env` 
 		`CONFIG_VOLUME=/home/horaira/workspace/indiclinic/bahmnicommitcomp/experimentalbranch/clinic-config`
 		for me i have provided actual path where clinic-config is present
-        ![Alt text](configvolume_update.png)
+        ![Alt text](./readme-source/configvolume_update.png)
 	1. Now we need to comment `bahmni-config` service in `bahmni-docker/bahmni-lite/docker-compose.yml`
-    ![Alt text](docker-compose.png)
+    ![Alt text](./readme-source/docker-compose.png)
 
 After thes we can start either using command  docker-compose up -d or by invoking ./run_bahmni.sh
 
@@ -125,11 +125,11 @@ Here also we should use 1.0.0 tag and follow similar steps as we did for clinic-
 https://github.com/Bahmni/openmrs-module-bahmniapps
 
 Updating .env file 
-![Alt text](updating-env-forbahmniapps.png)
+![Alt text](./readme-source/updating-env-forbahmniapps.png)
 
 Updating docker-compose.yml
 
-![Alt text](updating-yml-forbahmniapps.png)
+![Alt text](./readme-source/updating-yml-forbahmniapps.png)
 
 > Reference wiki for below instructions
 > https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configurations+docker
@@ -183,10 +183,6 @@ https://bahmni.atlassian.net/wiki/spaces/BAH/pages/34013647/Configuration+101
 
 > [!info]
 > the Configuration 101 is set of confgurations done on bahmni-standard as well as bahmni-lite, as bahmni-lite is subset of bahmni-standard so there may be chances that a particular configuration doesn't apply to it as it might be not using that particular module or in bahmn-lite it might have been implemented in other way
-
-![[Pasted image 20240219181041.png]]
-
-
 
 
 # Bahmni Docker
