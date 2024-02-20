@@ -1,12 +1,3 @@
-# Bahmni Docker
-
-Refer this [Wiki Page](https://bahmni.atlassian.net/wiki/spaces/BAH/pages/299630726/Running+Bahmni+on+Docker) or below summary Bhamni-lite local deployement for Running Bahmni on Docker for detailed instructions.
-
-# To start Bahmni LITE or STANDARD using docker compose: 
-1. Go to bahmni-lite or bahmni-standard subfolder. For example: `cd bahmni-lite`.
-2. Execute script: `./run-bahmni.sh`. This will give you options for start/stop/view-logs/pull/reset/etc. 
-3. Ensure your `.env` file in the sub-folder has correct PROFILE configured, before executing the above commands.  
-
 # Bahmni-lite local deployment
 **Bahmni Lite** is a light-weight, opensource flavor of Bahmni targeted towards clinics & small hospitals, which don’t need a heavy-weight HIMS, but are looking for an easy-to-use EMR & Billing software. See [Release Notes](https://bahmni.atlassian.net/wiki/spaces/BAH/pages/20185103 "/wiki/spaces/BAH/pages/20185103").
 
@@ -31,11 +22,11 @@ https://www.youtube.com/watch?v=ufbf7YWcrgY&t=1202s
 2. Please clone bahmni-docker from 
 https://github.com/Bahmni/bahmni-docker or Digiind repository which has forked one 
 
-**`git clone https://github.com/Bahmni/bahmni-docker.git ` **
+**`git clone https://github.com/Bahmni/bahmni-docker.git`**
 
 Or Digiind one 
 
-**`git clone https://github.com/DIGIIND-Healthcare/bahmni-docker.git ` **
+**`git clone https://github.com/DIGIIND-Healthcare/bahmni-docker.git`**
 
 Only above two things are needed to run Bahmni-lite locally
 Bahmni-docker repository contains [.env](https://github.com/Bahmni/bahmni-docker/blob/1.0.0-lite/bahmni-lite/.env) file which contains the dependent docker images and the [docker-compose.yml](https://github.com/Bahmni/bahmni-docker/blob/1.0.0-lite/bahmni-lite/docker-compose.yml) which contains needed instruction to pull the images and run it. 
@@ -44,18 +35,18 @@ Once cloned you can enter into bahmni-docker/bahmni-lite folder
 
 **`cd bahmni-docker/bahmni-lite`**
 
-
 **We are using tag 1.0.0-lite**
-So you can checkout tag 1.0.0-lite orif you have cloned from Digiind then this branch, which is branched out from 1.0.0-lite or if you want to try out on current master then you can skip checking out tag or digiind branch 
+So you can checkout tag **1.0.0-lite** or if you have cloned from **Digiind** then the branch **experimental/branched-from-1.0.0-lite** , which is branched out from 1.0.0-lite or if you want to try out on current master then you can skip checking out tag or digiind branch 
 
-**`git checkout 1.0.0-lite`**
+**`git checkout 1.0.0-lite`**   
 
 or
 
 **`git checkout experimental/branched-from-1.0.0-lite `**
 
-Below steps can be optional on first try but if you are comfortable then you can try, basically it is making some changes in .env and docker-compose.yml 
+Below steps can be optional on first try but if you are comfortable then you can try, basically it is making some changes in .env and docker-compose.yml to update the default values to your custom one 
 
+> [!optional] 
 > Edit the .env file, and make the following changes to set bahmni-lite profile
 > 1. Change **`COMPOSE_PROFILES=bahmni-lite`** (or run with default which is **`emr`**)
 > 2. (Optional) Change `TZ` to your desired timezone (or run with the default which is `UTC`). 
@@ -67,10 +58,10 @@ You can issue different command like running /stopping by running run_bahmni.sh 
 
 **`./run_bahmni.sh`**
 
-![Alt text](./readme-source/image.png)
+![Alt text](./readme-source/run-bahmni.png)
 
-> [!info] 
-> you can start bahmni app by opening localhost in browser, please not that openMRS takes some minutes to get initialized , so till it's initialized front page can open but it would not proceed as underlying database etc is not being initialised 
+** you can start bahmni app by opening localhost in browser**
+*Please note that openMRS takes some minutes to get initialized, so till it's initialized front page can open but it would not proceed as underlying database etc is not being initialised yet.*
 
 > [!info] 
 > - **Bahmni UI** (Username: `superman` Password: `Admin123`) : [https://localhost/bahmni/home/index.html](https://localhost/bahmni/home/index.html "https://localhost/bahmni/home/index.html")
@@ -79,36 +70,46 @@ You can issue different command like running /stopping by running run_bahmni.sh 
 > - **Metabase Analytics** (Username: `admin@mybahmni.org` Password: `Admin@123`): [https://localhost/metabase](https://localhost/metabase "https://localhost/metabase")/
 
 
-#### Getting Started Quickly with Bahmni on Docker
+Link
+Getting Started Quickly with Bahmni on Docker
 https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117744129/Getting+Started+Quickly+with+Bahmni+on+Docker#Running-Bahmni-Lite
 
 
 ## Updating/customising Bahmni-lite
 It seems (based on current exploration) we have to use this docker way also to modifying/updating code/configuration etc.
-Idea is to clone the needed repo, here as example below two repos we are using fo white-labelling and other customisation
+Idea is to clone the needed repo, here as example below two repos we are using, one fo configuration(clinic-config) and other for app customisation(openmrs-bahmni-apps)
 
-In bahmni documents they have mentioned to provide local config volume path to bahmni-docker .env value, for example if we want to make changes in clinic-config and locally wants to see, for that we need to follow below step
+Idea here is to ypdate .env file to provide local config volume path to bahmni-docker instead of docker images downloaded from registry, for example if we want to make changes in clinic-config and locally wants to see, for that we need to follow below step
+
 ### working with clinic-config volume
+
+> Please have a look into this youtube video if below steps are confusing
+> https://www.youtube.com/watch?v=eDab30kY54w&list=PLzknGpbejfSzEB2dT87mexJaBUsXNuZkD&index=6
+
 1. Please clone clinic-config repo https://github.com/Bahmni/clinic-config
 	1. `git clone https://github.com/Bahmni/clinic-config.git`
 	2. `cd clinic-config`
 2.  If we are using tag 1.0.0-lite for bahmni-docker then here also we can checkout 1.0.0 tag
 	1. `git checkout 1.0.0`
-3. Now we need to update bahmni-docker/bahmni-lite/.env and docker-compose.yml to take this local clinic-config settings instead of from docker image downloaded
+
+3. Now we need to update bahmni-docker/bahmni-lite/.env file and docker-compose.yml file to take this local clinic-config settings instead of from docker image downloaded
 	1. Update the `CONFIG_VOLUME` varaible in `bahmni-docker/bahmni-lite/.env` 
 		`CONFIG_VOLUME=/home/horaira/workspace/indiclinic/bahmnicommitcomp/experimentalbranch/clinic-config`
 		for me i have provided actual path where clinic-config is present
+        ![Alt text](configvolume_update.png)
 	1. Now we need to comment `bahmni-config` service in `bahmni-docker/bahmni-lite/docker-compose.yml`
-![[Pasted image 20240219172904.png]]
-
-![[Pasted image 20240219172928.png]]
+    ![Alt text](docker-compose.png)
 
 After thes we can start either using command  docker-compose up -d or by invoking ./run_bahmni.sh
 
 > [!info] 
-> Once it's running , i see that , if you are making any changes , such as in whiteLable.json, it immediately reflects after refresh, but i think some some contents are being used only at the time of initialization in that case the dependent services needs to be restarted, so that it should reflect.
+> Once it's running , I see that , if you are making any changes , such as in whiteLable.json, it immediately reflects after refresh, but I think some some contents are being used only at the time of initialization in that case the dependent services needs to be restarted, so that it should reflect.
 
 ### Working with  openmrs-module-bahmniapps
+
+> Please have a look into this youtube video if below steps are confusing
+> https://www.youtube.com/watch?v=x2XHDkpEmck&list=PLzknGpbejfSzEB2dT87mexJaBUsXNuZkD&index=8
+
 openmrs-module-bahmniapps also has to be done in same way as clinic-config , but here at it's java module we need to build after making changes
 > [!info]
 > openmrs-module-bahmniapps repository contains most of the **frontend** code for the **Bahmni EMR**. It is written in **AngularJS** with only the Form viewer part utilising **_React_**.
@@ -123,8 +124,15 @@ openmrs-module-bahmniapps also has to be done in same way as clinic-config , but
 Here also we should use 1.0.0 tag and follow similar steps as we did for clinic-config
 https://github.com/Bahmni/openmrs-module-bahmniapps
 
-Reference wiki for below instructions
-https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configurations+docker
+Updating .env file 
+![Alt text](updating-env-forbahmniapps.png)
+
+Updating docker-compose.yml
+
+![Alt text](updating-yml-forbahmniapps.png)
+
+> Reference wiki for below instructions
+> https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configurations+docker
 
 
 `git clone https://github.com/Bahmni/openmrs-module-bahmniapps.git`
@@ -133,7 +141,7 @@ https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configu
 
 `git checkout 1.0.0`
 
-We need to intall build dependencies, i found it little bit compilcated as it's using some older version of ruby and for me somehow ubuntu 22.04 was not supporting it.
+We need to intall build dependencies, I found it little bit compilcated as it's using some older version of ruby and for me somehow ubuntu 22.04 was not supporting it.
 
 #### One time installation:
 
@@ -157,9 +165,16 @@ These steps need to performed ONLY the FIRST TIME you set up this code.
 1. `yarn install`
 2. `yarn ci` (will internally trigger grunt)
 3. If build is successful, the `dist` folder has the set of files to be deployed in Apache (or in Vagrant).
-#### Docker (Hot Deploy)
 
-1. If you are using Bahmni Docker, then you can hot deploy your app by following these steps: [Bahmni Web Configurations Docker (Wiki)](https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configurations+docker)
+Once successfully built and you have made changes in .env and docker-compose.yml as mentioned above, then now you can restart it and see the changes being reflected.
+
+`docker-compose up -d bahmni-web`  # it has to be done from inside bahmni-docker/bahmni-lite folder
+
+I see that changes in html or javascript files are being reflected without re-compiling bahmni-apps, may be those being pulled directly at runtime and not part of build.
+
+#### Docker (Hot Deploy)
+> it's again instruction provided above in this wiki
+> 1. If you are using Bahmni Docker, then you can hot deploy your app by following these steps: [Bahmni Web Configurations Docker (Wiki)](https://bahmni.atlassian.net/wiki/spaces/BAH/pages/3117449349/Bahmni-Web+Configurations+docker)
 
 ### Configuration page
 
@@ -172,3 +187,13 @@ https://bahmni.atlassian.net/wiki/spaces/BAH/pages/34013647/Configuration+101
 ![[Pasted image 20240219181041.png]]
 
 
+
+
+# Bahmni Docker
+
+Refer this [Wiki Page](https://bahmni.atlassian.net/wiki/spaces/BAH/pages/299630726/Running+Bahmni+on+Docker) or below summary Bhamni-lite local deployement for Running Bahmni on Docker for detailed instructions.
+
+# To start Bahmni LITE or STANDARD using docker compose: 
+1. Go to bahmni-lite or bahmni-standard subfolder. For example: `cd bahmni-lite`.
+2. Execute script: `./run-bahmni.sh`. This will give you options for start/stop/view-logs/pull/reset/etc. 
+3. Ensure your `.env` file in the sub-folder has correct PROFILE configured, before executing the above commands.  
